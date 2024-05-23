@@ -1,0 +1,223 @@
+<a href="#popup:number1" class="showsform1"></a>
+ <a href="#popup:number2" class="showsform2"></a>
+ <a href="#popup:number3" class="showsform3"></a>
+ <a href="#popup:number4" class="showsform4"></a>
+ <a href="#popup:number5" class="showsform5"></a>
+  
+ 
+ <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <style>
+       #map {
+           /*Задаём ширину, высоту и отступы у карты*/
+            width: 100%; height: 600px; padding: 0; margin: 0;
+        }
+      a[href^="#place"] {
+          pointer-events:none;
+      }
+     [class$='-image-with-content'] {
+      border-radius: 100px;
+}
+ 
+     .t-popup__container.t-popup__container-static {
+    -moz-transform: translateY(30%) scale(.5);
+    -ms-transform: translateY(30%) scale(.5);
+    -webkit-transform: translateY(30%) scale(.5);
+    -o-transform: translateY(30%) scale(.5);
+    transform: translateY(30%) scale(0.5);
+}
+.t-popup__container-animated {
+    -webkit-transition: transform ease-in-out .6s;
+    -moz-transition: transform ease-in-out .6s;
+    -o-transition: transform ease-in-out .6s;
+    transition: transform ease-in-out .6s;
+}
+.activebaloon{
+    box-shadow: 0px 0px 0px 6px #fcb42f;
+     border-radius: 100px;
+     
+}
+    </style>
+ 
+<script>
+ 
+$(document).ready(function(){
+   
+  //Добавили классы к иконкам и тексту в ZeroBlock
+  $('a[href="#placeicon"]').addClass('placeicon').hide();
+  $('a[href="#placetext"]').addClass('placetext');
+   
+ 
+   ymaps.ready(function () {
+    var myMap = new ymaps.Map('map', {
+            //Координаты центра при запуске карты
+            center: [45.25506128322973,34.282927215986],
+            //Увеличение карты при запуске
+            zoom: 8
+        }, {
+            searchControlProvider: 'yandex#search'
+        }),
+ 
+        // Создаём макет содержимого.
+        MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+            '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+        ),
+//****************************************
+        //Задаём координаты нашей основной точки
+        myPlacemarkWithContent1 = new ymaps.Placemark([45.09303239188218,34.63054020633623], {
+            hintContent: 'БЕЛАЯ СКАЛА'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://static.tildacdn.com/tild3565-3139-4836-b265-616632653235/279.jpg',
+            // Размеры метки.
+            iconImageSize: [30, 30],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-15, -15],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            iconContentLayout: MyIconContentLayout
+        });
+         
+//****************************************        
+        //Задаём координаты нашей второй точки
+        myPlacemarkWithContent2 = new ymaps.Placemark([45.04639697641663,36.18786242202529], {
+            hintContent: 'КОЯШСКОЕ ОЗЕРО'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://static.tildacdn.com/tild6531-3333-4561-b830-396266356536/280.jpg',  
+            // Размеры метки.
+            iconImageSize: [30, 30],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-15, -15],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            iconContentLayout: MyIconContentLayout
+        });
+         
+//****************************************        
+        //Задаём координаты нашей третьей точки
+        myPlacemarkWithContent3 = new ymaps.Placemark([44.50034524980931,33.59851330607388], {
+            hintContent: 'БАЛАКЛАВСКАЯ БУХТА'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://static.tildacdn.com/tild3733-3065-4330-b737-373232366532/281.jpg',  
+            // Размеры метки.
+            iconImageSize: [30, 30],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-15, -15],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            iconContentLayout: MyIconContentLayout
+        });     
+         
+        //****************************************        
+        //Задаём координаты нашей четвёртой точки
+        myPlacemarkWithContent4 = new ymaps.Placemark([44.447141825393345,34.0589618849408], {
+            hintContent: 'ТАРАКТАШСКАЯ ТРОПА'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://static.tildacdn.com/tild3030-3330-4465-a636-306166623164/284.jpg',  
+            // Размеры метки.
+            iconImageSize: [30, 30],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-15, -15],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            iconContentLayout: MyIconContentLayout
+        });    
+         
+         
+        //****************************************        
+        //Задаём координаты нашей пятой точки
+        myPlacemarkWithContent5 = new ymaps.Placemark([45.34765387473703,32.49356836939008], {
+            hintContent: 'ТАРХАНКУТ'
+        }, {
+            // Опции.
+            // Необходимо указать данный тип макета.
+            iconLayout: 'default#imageWithContent',
+            // Своё изображение иконки метки.
+            iconImageHref: 'https://static.tildacdn.com/tild3061-3164-4062-b234-313766613266/276.jpg',  
+            // Размеры метки.
+            iconImageSize: [30, 30],
+            // Смещение левого верхнего угла иконки относительно
+            // её "ножки" (точки привязки).
+            iconImageOffset: [-15, -15],
+            // Смещение слоя с содержимым относительно слоя с картинкой.
+            iconContentOffset: [15, 15],
+            // Макет содержимого.
+            iconContentLayout: MyIconContentLayout
+        });    
+         
+         
+//Добавляем объекты на карту
+    myMap.geoObjects
+         .add(myPlacemarkWithContent1)
+          .add(myPlacemarkWithContent2)
+           .add(myPlacemarkWithContent3)
+            .add(myPlacemarkWithContent4)
+             .add(myPlacemarkWithContent5);
+          
+      //При клике миниатюру 1         
+         myPlacemarkWithContent1.events.add('click', function () { 
+               $('[class$="activebaloon"]').removeClass('activebaloon');
+               $('[class$="-image-with-content"]:eq(0)').addClass('activebaloon');
+               $('.placeicon').hide();$('.placeicon:eq(0)').show(200);
+               $('.placetext').text('БЕЛАЯ СКАЛА');
+             setTimeout(function(){$(".showsform1")[0].click();}, 500);  
+         });
+         //При клике миниатюру 2
+         myPlacemarkWithContent2.events.add('click', function () {
+               $('[class$="activebaloon"]').removeClass('activebaloon');
+               $('[class$="-image-with-content"]:eq(1)').addClass('activebaloon');
+               $('.placeicon').hide();$('.placeicon:eq(1)').show(200);
+               $('.placetext').text('КОЯШСКОЕ ОЗЕРО');
+             setTimeout(function(){$(".showsform2")[0].click();}, 500);  
+         });
+         //При клике миниатюру 3
+          myPlacemarkWithContent3.events.add('click', function () {
+               $('[class$="activebaloon"]').removeClass('activebaloon');
+               $('[class$="-image-with-content"]:eq(2)').addClass('activebaloon');
+               $('.placeicon').hide();$('.placeicon:eq(2)').show(200);
+               $('.placetext').text('БАЛАКЛАВСКАЯ БУХТА');
+             setTimeout(function(){$(".showsform3")[0].click();}, 500);  
+         });
+         //При клике миниатюру 4
+           myPlacemarkWithContent4.events.add('click', function () {
+               $('[class$="activebaloon"]').removeClass('activebaloon');
+               $('[class$="-image-with-content"]:eq(3)').addClass('activebaloon');
+               $('.placeicon').hide();$('.placeicon:eq(3)').show(200);
+               $('.placetext').text('ТАРАКТАШСКАЯ ТРОПА');
+             setTimeout(function(){$(".showsform4")[0].click();}, 500);  
+         });
+         //При клике миниатюру 5
+           myPlacemarkWithContent5.events.add('click', function () {
+              $('[class$="activebaloon"]').removeClass('activebaloon');
+               $('[class$="-image-with-content"]:eq(4)').addClass('activebaloon');
+               $('.placeicon').hide();$('.placeicon:eq(4)').show(200);
+               $('.placetext').text('ТАРХАНКУТ');
+             setTimeout(function(){$(".showsform5")[0].click();}, 500);  
+         });
+          
+});
+ 
+});
+</script>
